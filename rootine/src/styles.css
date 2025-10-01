@@ -1,0 +1,954 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #E8F3E8;
+    font-family: "Poppins", sans-serif;
+    padding: 20px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    width: 100%;
+}
+
+.nav-left, .nav-right {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-icon {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+}
+
+.nav-left {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.nav-right {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.nav-left a, .nav-right a {
+    color: #666;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    font-weight: bold;
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.nav-left a:hover, .nav-right a:hover {
+    border-color: rgba(0, 0, 0, 0.25);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+}
+
+.back-button, .home-button {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+button {
+  all: unset;
+}
+
+.nav-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+a {
+    text-decoration: none;
+    color: #2e7d32;
+}
+
+.nav-right {
+    display: flex;
+    gap: 10px;
+}
+
+main {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: #2E7D32;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+}
+
+.search-container {
+    min-width: 300px;
+    width: 75%;
+    max-width: 800px;
+    margin: 1rem auto;
+    position: relative;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 1.2rem;
+    border: 3px solid rgba(0, 0, 0, 0.15);
+    border-radius: 25px;
+    background-color: rgba(255, 248, 225, 0.8);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.search-icon {
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.subtitle {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.placeholder-image {
+    width: 200px;
+    height: 200px;
+    border: 1px solid #ccc;
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.placeholder-image img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Search Results Styles */
+.results-count {
+    color: #666;
+    font-size: 1.1rem;
+    margin: 1rem auto;
+    width: 75%;
+    max-width: 800px;
+    padding-left: 0.5rem;
+}
+
+.plant-card {
+    width: 100%;
+    background-color: rgba(255, 248, 225, 0.8);
+    padding: 15px;
+    margin: 10px 0;
+    border: 3px solid rgba(0, 0, 0, 0.15);
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    
+}
+
+.plant-card:hover {
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.plant-card img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Plant Detail Styles */
+.plant-detail {
+    background-color: #fff;
+    padding: 0px;
+    border-radius: 10px;
+    margin: 20px;
+    max-width: 800px;
+}
+
+.plant-content {
+    display: flex;
+    gap: 30px;
+}
+
+.image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.image-container img {
+    width: 150px;  /* Fixed square size */
+    height: 150px; /* Same as width for square */
+    object-fit: cover;
+    border-radius: 5px;
+    flex-shrink: 0;
+}
+
+.plant-info {
+    flex: 3;
+}
+
+.plant-info h1 {
+    color: #2e7d32;
+    margin-bottom: 5px;
+    font-size: 24px;
+}
+
+/* Contact Form Styles */
+.contact-form {
+    width: 85%;
+    max-width: 800px;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 1.2rem;
+    border: 3px solid rgba(0, 0, 0, 0.15);
+    border-radius: 25px;
+    background-color: rgba(255, 248, 225, 0.8);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.contact-form textarea {
+    min-height: 200px;
+    resize: vertical;
+    border-radius: 15px;  /* Slightly less rounded for the larger box */
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: rgba(0, 0, 0, 0.25);
+    background-color: rgba(255, 248, 225, 0.95);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.contact-form button {
+    align-self: center;
+    padding: 0.8rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #666;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.contact-form button:hover {
+    border-color: rgba(0, 0, 0, 0.25);
+    background-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+}
+
+/* About Page Styles */
+.about-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    line-height: 1.6;
+}
+
+.plant-detail img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.plant-content {
+    line-height: 1.6;
+}
+
+.plant-content p {
+    margin-bottom: 15px;
+}
+
+.search-results {
+    margin-top: 20px;
+}
+
+#plantOfDay {
+    width: 100%;
+    max-width: 200px;
+    margin: 20px auto;
+    cursor: pointer;
+}
+
+#plantOfDay .plant-card {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#plantOfDay img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+#plantOfDay .plant-info {
+    text-align: center;
+}
+
+#plantOfDay h2 {
+    color: #2e7d32;
+    margin-bottom: 5px;
+    font-size: 1.2em;
+}
+
+#plantOfDay p {
+    color: #666;
+    font-style: italic;
+    font-size: 0.9em;
+}
+
+.plant-card .plant-info {
+    flex: 1;
+}
+
+.plant-card h2 {
+    color: #2E7D32;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.plant-card p {
+    font-style: italic;
+}
+
+/* Add these new styles */
+.centered-content {
+    text-align: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.centered-content h1 {
+    color: #2d7a32;
+    text-align: center;
+    font-size: min(2.5rem, 8vw);  /* Responsive font size */
+    margin-bottom: 2rem;
+    white-space: nowrap;  /* Prevent wrapping */
+}
+
+.plant-of-day-box {
+    background-color: #E8F3E8;
+    border-radius: 8px;
+    padding: 0.6rem;
+    margin: 0 auto;
+    margin-top: 2rem;
+    /* width: 310px; */
+    /* min-width: 150px; */
+    max-width: 35vw;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    /* border: 3px solid rgba(0, 0, 0, 0.1); */
+    transition: all 0.2s ease;
+}
+
+.plant-of-day-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+}
+
+.plant-of-day-box p {
+    font-size: 1.1rem;
+    color: #4CAF50;
+    font-weight: bold;
+    margin: 0;
+    text-align: center;
+}
+
+.plant-of-day-box:hover  p {
+    font-size: 1.1rem;
+    color: #000000;
+    font-weight: bold;
+    margin: 0;
+}
+
+.plant-of-day-box img {
+    width: 25px;
+    height: 25px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.search-container input:focus {
+    outline: none;
+    border-color: rgba(0, 0, 0, 0.25);
+    background-color: rgba(255, 248, 225, 0.95);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+h1 {
+    color: #2d7a32;  /* Match the green from index */
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+/* About container */
+.about-container {
+    width: 85%;
+    max-width: 800px;
+    margin: 2rem auto;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Title styling */
+h1 {
+    color: #2d7a32;
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+/* About text styling */
+.about-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Search results container */
+.search-results-container {
+    width: 85%;
+    max-width: 800px;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Individual result container */
+.plant-result {
+    background-color: white;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;  /* Take full width of parent */
+}
+
+.plant-result:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Results count styling */
+.results-count {
+    width: 75%;
+    max-width: 800px;
+    margin: 1rem auto;
+    color: #666;
+    font-size: 1.1rem;
+    padding-left: 0.5rem;
+}
+
+/* Plant image */
+.plant-result img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Plant text info */
+.plant-info h2 {
+    color: #2d7a32;
+    font-size: 1.2rem;
+    margin: 0 0 0.3rem 0;
+}
+
+.plant-info p {
+    color: #666;
+    font-style: italic;
+    margin: 0;
+}
+
+/* Search container on results page */
+.search-results-page .search-container {
+    width: 85%;
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+/* Search input */
+.search-results-page .search-container input {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 1.2rem;
+    border: 3px solid rgba(0, 0, 0, 0.15);
+    border-radius: 25px;
+    background-color: rgba(255, 248, 225, 0.8);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Results count */
+.results-count {
+    color: #666;
+    font-size: 1.1rem;
+    margin: 1rem 0;
+    padding-left: 0.5rem;
+}
+
+/* Search results wrapper */
+.search-results {
+    width: 75%;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 768px) {
+    .search-results {
+        width: 90%;
+    }
+}
+
+/* Individual plant result card */
+.plant-result {
+    background-color: white;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;  /* Take full width of parent */
+}
+
+/* Results count */
+.results-count {
+    width: 75%;
+    max-width: 800px;
+    margin: 1rem auto;
+    color: #666;
+    font-size: 1.1rem;
+    padding-left: 0.5rem;
+}
+
+.plant-container {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    width: 90%;
+    max-width: 1000px;
+    margin: 1rem auto;
+    display: flex;
+    gap: 1.5rem;
+    min-height: 400px;
+}
+
+.plant-image-section {
+    flex: 0 0 25%;
+    max-width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.plant-image-section img {
+    width: 100%;
+    max-width: 35vw;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.add-to-tasks {
+    width: 100%;
+    max-width: 50vw;
+    padding: 0.6rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.plant-name {
+    color: #4CAF50;
+    margin-bottom: 0.3rem;
+    text-transform: capitalize;
+}
+
+.scientific-name {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.care-info {
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.care-detail {
+    margin-bottom: 0.3rem;
+}
+
+.description {
+    margin-top: 0.8rem;
+    font-size: 0.9rem;
+}
+
+.care-detail strong {
+    font-size: 0.9rem;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .plant-container {
+        flex-direction: column;
+        padding-top: 2rem;
+    }
+    
+    .plant-image-section {
+        max-width: 100%;
+    }
+}
+ 
+.care-detail {
+    text-transform: capitalize;
+}
+
+/* Add these styles for responsive navigation */
+
+@media (max-width: 768px) {
+    nav {
+        padding: 10px;  /* Slightly reduced padding */
+        justify-content: space-between;  /* Maintain spread */
+    }
+
+    .nav-left {
+        gap: 0.5rem;  /* Reduced gap for smaller screens */
+    }
+
+    .nav-right {
+        gap: 0.5rem;  /* Reduced gap for smaller screens */
+    }
+
+    /* If you're hiding text on mobile, keep the icons properly aligned */
+    .nav-text {
+        display: none;
+    }
+
+    .nav-icon-only {
+        display: inline;
+    }
+}
+
+/* For very small screens */
+@media (max-width: 480px) {
+    nav {
+        padding: 10px;
+    }
+
+    .nav-left a, .nav-right a {
+        font-size: 0.85rem;
+        padding: 0.3rem 0.6rem;
+    }
+
+    /* Hide "Plant of the day" text on very small screens */
+    .nav-right a:first-child {
+        display: none;
+    }
+}
+
+/* Add these icon classes to your existing nav styles */
+.nav-text {
+    display: inline;
+}
+
+.nav-icon-only {
+    display: none;
+    width: 24px;
+    height: 24px;
+}
+
+/* Update media query */
+@media (max-width: 768px) {
+    .nav-text {
+        display: none;
+    }
+
+    .nav-icon-only {
+        display: inline;
+    }
+
+    .nav-left a, .nav-right a {
+        padding: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+/* Popup styles */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.popup-content h2 {
+    color: #4CAF50;
+    margin-bottom: 1rem;
+}
+
+.popup-content button {
+    margin-top: 1rem;
+    padding: 0.8rem 2rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.popup-content button:hover {
+    background-color: #45a049;
+    transform: translateY(-1px);
+}
+
+/* Add to your existing styles */
+.contact-form select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('/images/dropdown.png');
+    background-repeat: no-repeat;
+    background-position: right 1.5rem center;
+    background-size: 24px;
+    padding-right: 3rem; /* Make room for the icon */
+}
+
+/* Remove default arrow in IE */
+.contact-form select::-ms-expand {
+    display: none;
+}
+
+.about-text p {
+    margin-bottom: 1.2rem;
+    line-height: 1.6;
+}
+
+.about-text ul {
+    margin: 1rem 0 1.5rem 2rem;
+    line-height: 1.6;
+}
+
+.about-text ul li {
+    margin-bottom: 0.5rem;
+}
+
+.end-note {
+    text-align: center;
+    color: #4CAF50;
+    font-weight: bold;
+    margin-top: 2rem;
+}
+
+.plant-details-section h1 {
+    text-transform: capitalize;
+    color: #2d7a32;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;  /* Reduced space between names */
+    font-weight: bold;
+}
+
+.plant-details-section h2 {
+    text-align: center;
+    color: #666;
+    font-size: 1rem;
+    font-style: italic;
+    margin-bottom: 1rem;  /* More space after scientific name */
+    font-weight: normal;  /* Less bold than common name */
+}
+
+.care-info {
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.care-detail {
+    margin-bottom: 0.3rem;
+}
+
+.description {
+    margin-top: 0.8rem;
+}
+
+.description strong {
+    font-size: 0.9rem;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .search-container {
+        width: 90%;  /* Wider on mobile */
+        min-width: unset;  /* Remove min-width constraint */
+        margin: 1.5rem auto;
+    }
+
+    .search-container input {
+        font-size: 1rem;  /* Slightly smaller font for mobile */
+        padding: 0.8rem 1.2rem;  /* Slightly adjusted padding */
+    }
+}
+
+/* Update existing plant-result styles */
+.plant-result {
+    background-color: rgba(255, 248, 225, 0.8);
+    border: 3px solid rgba(0, 0, 0, 0.15);
+    border-radius: 25px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Add media query for mobile screens */
+@media (max-width: 768px) {
+    .search-results-container {
+        width: 95%;  /* Make container wider on mobile */
+    }
+
+    .plant-result {
+        padding: 0.8rem;  /* Reduce padding */
+        gap: 0.8rem;     /* Reduce gap between image and text */
+    }
+
+    .plant-result img {
+        width: 60px;     /* Make image smaller */
+        height: 60px;    /* Keep it square */
+    }
+
+    .plant-info h2 {
+        font-size: 1rem;  /* Smaller font size for title */
+        margin-bottom: 0.2rem;
+    }
+
+    .plant-info p {
+        font-size: 0.8rem;  /* Smaller font for scientific name */
+    }
+}
+
+.home_wave_text {
+  font-size: 1.75rem;
+  text-align: center;
+}
+.wave {
+  animation-name: wave-animation;
+  animation-duration: 2.5s; 
+  animation-iteration-count: infinite;
+  transform-origin: 70% 70%;
+  display: inline-block;
+}
+
+@keyframes wave-animation {
+    0% { transform: rotate( 0.0deg) }
+   10% { transform: rotate(14.0deg) }
+   20% { transform: rotate(-8.0deg) }
+   30% { transform: rotate(14.0deg) }
+   40% { transform: rotate(-4.0deg) }
+   50% { transform: rotate(10.0deg) }
+   60% { transform: rotate( 0.0deg) }
+  100% { transform: rotate( 0.0deg) }
+}
