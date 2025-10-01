@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import config from '@/config';
@@ -26,19 +28,12 @@ export default function SearchResults() {
   setLoading(true);
   try {
     const url = new URL('https://perenual.com/api/v2/species-list');
-    url.searchParams.append('key', config.API_KEY);         // Your API key
+    url.searchParams.append('key', config.API_KEY);         //  API key
     url.searchParams.append('q', query);                     // Search term
     url.searchParams.append('page', '1');                    // Pagination: first page
     url.searchParams.append('hardiness', '4-8');             // Hardiness filter (optional)
 
     const res = await fetch(url.toString());
-
-    // if (!res.ok) {
-    //   // API returned an error code (like 401, 429, 500)
-    //   const errorData = await res.json();
-    //   throw new Error(errorData.message || 'Failed to fetch data');
-    // }
-
     const data = await res.json();
 
     if (data.message?.includes('Please Upgrade')) {
@@ -81,26 +76,62 @@ export default function SearchResults() {
       {/* Nav Bar */}
       <nav>
         <div className="nav-left">
-          <button onClick={() => window.history.back()} className="nav-button">
-            <img src="/images/back.png" alt="Back" className="nav-icon" />
-            </button>
-          <a href="/">
-            <img src="/images/homebutton.png" alt="Home" className="nav-icon" />
-          </a>
+          <button onClick={() => window.history.back()}>
+            <Image
+              src="/images/back.png"
+              alt="Back"
+              className="nav-icon"
+              width={32}
+              height={32}
+            />
+          </button>
+          <Link href="/">
+            <Image
+              src="/images/homebutton.png"
+              alt="Home"
+              className="nav-icon"
+              width={32}
+              height={32}
+            />
+          </Link>
         </div>
+
         <div className="nav-right">
-          <a href={`/plant-info/${config.PLANT_OF_DAY_ID}`}>
+          <Link
+            href={`/plant-info/${config.PLANT_OF_DAY_ID}`}
+            className="plant-of-day-link"
+          >
             <span className="nav-text">Plant of the day</span>
-            <img src="/images/plant.png" alt="Plant of the day" className="nav-icon-only" />
-          </a>
-          <a href="/contact.html">
+            <Image
+              src="/images/plant.png"
+              alt="Plant of the day"
+              className="nav-icon-only"
+              width={32}
+              height={32}
+            />
+          </Link>
+
+          <Link href="/contact">
             <span className="nav-text">Contact us</span>
-            <img src="/images/contact.png" alt="Contact" className="nav-icon-only" />
-          </a>
-          <a href="/about.html">
+            <Image
+              src="/images/contact.png"
+              alt="Contact"
+              className="nav-icon-only"
+              width={32}
+              height={32}
+            />
+          </Link>
+
+          <Link href="/about">
             <span className="nav-text">About us</span>
-            <img src="/images/about.png" alt="About" className="nav-icon-only" />
-          </a>
+            <Image
+              src="/images/about.png"
+              alt="About"
+              className="nav-icon-only"
+              width={32}
+              height={32}
+            />
+          </Link>
         </div>
       </nav>
 
@@ -127,7 +158,7 @@ export default function SearchResults() {
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <p>{results.length} results for "{searchQuery}"</p>
+          <p>{results.length} results for &quot;{searchQuery}&quot;</p>
         )}
       </div>
 

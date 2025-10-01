@@ -20,7 +20,8 @@ export default function AboutPage() {
   }, []);
 
   return (
-    <>
+    <div>
+    {/* Nav Bar */}
       <nav>
         <div className="nav-left">
           <button onClick={() => window.history.back()}>
@@ -128,6 +129,6 @@ export default function AboutPage() {
           </div>
         </div>
       </main>
-    </>
+    </div>
   );
 }
