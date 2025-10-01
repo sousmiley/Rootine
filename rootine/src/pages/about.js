@@ -15,7 +15,7 @@ export default function AboutPage() {
   useEffect(() => {
     const links = document.querySelectorAll('.plant-of-day-link');
     links.forEach((link) => {
-      link.href = `/plant-info?id=${config.PLANT_OF_DAY_ID}`;
+      link.href = `/plant-info/${config.PLANT_OF_DAY_ID}`;
     });
   }, []);
 
@@ -45,7 +45,7 @@ export default function AboutPage() {
 
         <div className="nav-right">
           <Link
-            href={`/plant-info?id=${config.PLANT_OF_DAY_ID}`}
+            href={`/plant-info/${config.PLANT_OF_DAY_ID}`}
             className="plant-of-day-link"
           >
             <span className="nav-text">Plant of the day</span>
@@ -94,7 +94,7 @@ export default function AboutPage() {
             </p>
             <p>
               Why? Because everyone deserves a bit of nature in their living
-              space! Whether you're a first-time plant parent or an experienced
+              space! Whether you&rsquo;re a first-time plant parent or an experienced
               grower, keeping track of plant care can be tricky. Rootine can
               help...
             </p>
@@ -103,7 +103,7 @@ export default function AboutPage() {
             <p>
               Rootine began as a small group project created by four students
               passionate about making gardening more accessible. Since then,
-              it's grown into something more — now led independently, inspired
+              it&rsquo;s grown into something more — now led independently, inspired
               by a passion for learning, community, and real-world gardening
               practice.
             </p>
@@ -115,7 +115,7 @@ export default function AboutPage() {
               <li>Set up watering reminders in Google Tasks</li>
               <li>
                 Discover and learn more about new plants everyday through the
-                "Plant of the Day" feature
+                &quot;Plant of the Day&quot; feature
               </li>
             </ul>
 

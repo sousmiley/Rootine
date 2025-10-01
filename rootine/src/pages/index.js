@@ -43,7 +43,7 @@ export default function HomePage() {
         </div>
 
         <div className="nav-right">
-          <Link href={`/plant-info?id=${config.PLANT_OF_DAY_ID}`}>
+          <Link href={`/plant-info/${config.PLANT_OF_DAY_ID}`}>
             <span className="nav-text">Plant of the day</span>
             <Image src="/images/plant.png" alt="Plant of the day" className="nav-icon-only" width={32} height={32} />
           </Link>
@@ -71,7 +71,7 @@ export default function HomePage() {
 
       <div
         className="plant-of-day-box"
-        onClick={() => router.push(`/plant-info?id=${config.PLANT_OF_DAY_ID}`)}
+        onClick={() => router.push(`/plant-info/${config.PLANT_OF_DAY_ID}`)}
       >
         <p>
           <Image src="/images/plantplaceholder.png" alt="Plant of the day" width={100} height={100} />

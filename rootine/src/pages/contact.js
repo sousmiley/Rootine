@@ -82,7 +82,7 @@ export default function ContactPage() {
         </div>
 
         <div className="nav-right">
-          <Link href={`/plant-info?id=${config.PLANT_OF_DAY_ID}`}>
+          <Link href={`/plant-info/${config.PLANT_OF_DAY_ID}`}>
             <span className="nav-text">Plant of the day</span>
             <Image
               src="/images/plant.png"
