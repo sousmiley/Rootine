@@ -5,7 +5,20 @@
 
 version: 2
 updates:
+  # Enable version updates for GitHub Actions
+  - package-ecosystem: "github-actions"
+    # Workflow files stored in the default location of `.github/workflows`
+    # You don't need to specify `/.github/workflows` for `directory`. You can use `directory: "/"`.
+    directory: "/"
+    schedule:
+      interval: "weekly"
+  
+  # Updates for npm
   - package-ecosystem: "npm" # See documentation for possible values
     directory: "/rootine" # Location of package manifests
     schedule:
-      interval: "weekly"
+      interval: "daily"
+  open-pull-requests-limit: 5
+      allow:
+        - dependency-type: "direct"
+  
