@@ -1,29 +1,28 @@
-# To get started with Dependabot version updates, you'll need to specify which
-# package ecosystems to update and where the package manifests are located.
-# Please see the documentation for all configuration options:
 # https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
 
 version: 2
 updates:
-  # Enable version updates for GitHub Actions
+  # Ver updates for GitHub Actions
   - package-ecosystem: "github-actions"
     # Workflow files stored in the default location of `.github/workflows`
     # You don't need to specify `/.github/workflows` for `directory`. You can use `directory: "/"`.
     directory: "/"
     schedule:
       interval: "weekly"
+    labels:
+        - "github actions"
+    commit-message:
+        prefix: "gh actions"
   
   # Updates for npm
-  - package-ecosystem: "npm" # See documentation for possible values
-    directory: "/rootine" # Location of package manifests
+  - package-ecosystem: "npm"
+    directory: "/rootine"
     schedule:
       interval: "daily"
     open-pull-requests-limit: 10
-      allow:
+    allow:
         - dependency-type: "direct"
-      labels:
+    labels:
         - "npm dependencies"
-      commit-message:
-        # Prefix all commit messages with "npm: "
+    commit-message:
         prefix: "npm"
-  
