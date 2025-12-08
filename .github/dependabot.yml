@@ -15,15 +15,3 @@ updates:
     commit-message:
         prefix: "gh actions"
   
-  # Updates for npm
-  - package-ecosystem: "npm"
-    directory: "/rootine"
-    schedule:
-      interval: "daily"
-    open-pull-requests-limit: 10
-    allow:
-        - dependency-type: "direct"
-    labels:
-        - "npm dependencies"
-    commit-message:
-        prefix: "npm"
