@@ -1,33 +1,26 @@
 /**
  * GET /api/plant-search?q=<query>&page=<n>
- *
- * Proxies to Perenual species-list. The API key never reaches the browser.
+ * Proxies to Perenual species-list endpoint.
  */
+
+const PERENUAL_API_KEY = 'sk-PeSx68e09d73a8b5412578';
+
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
   const { q = '', page = '1' } = req.query;
-  const apiKey = sk-PeSx68e09d73a8b5412578;
-
-  // if (!apiKey || apiKey === 'your_perenual_api_key_here') {
-  //   return res.status(503).json({
-  //     error: 'API key not configured',
-  //     hint: 'Add PERENUAL_API_KEY to your .env.local file. Get a free key at https://perenual.com/api/auth/register',
-  //   });
-  // }
 
   try {
     const url = new URL('https://perenual.com/api/v2/species-list');
-    url.searchParams.set('key', apiKey);
+    url.searchParams.set('key', PERENUAL_API_KEY);
     if (q) url.searchParams.set('q', q);
     url.searchParams.set('page', page);
 
     const upstream = await fetch(url.toString());
-    const data     = await upstream.json();
+    const data = await upstream.json();
 
-    // Perenual returns a 200 with a message when hitting free-tier limits
     if (data.message?.toLowerCase().includes('upgrade')) {
       return res.status(402).json({ error: 'Perenual free tier limit reached', data: [] });
     }

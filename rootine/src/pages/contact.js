@@ -59,6 +59,8 @@ export default function ContactPage() {
           </div>
         </div>
 
+        
+        
         {/* Form card */}
         <div className="contact-form-card">
           <form
@@ -124,14 +126,16 @@ export default function ContactPage() {
         </div>
       </div>
 
-      {/* Success modal */}
+      
+      
+      {/* success modal */}
       {showModal && (
         <div className="modal-backdrop" onClick={() => setShowModal(false)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <div style={{ textAlign: 'center', padding: '0.5rem 0 1rem' }}>
               <Check size={48} style={{ color: 'var(--accent)', marginBottom: '0.75rem' }} />
               <h2>Message sent!</h2>
-              <p style={{ marginTop: '0.5rem' }}>Thanks for reaching out. We'll get back to you soon.</p>
+              <p style={{ marginTop: '0.5rem' }}>Thanks for reaching out, we'll get back to you soon!</p>
             </div>
             <div className="modal-actions" style={{ justifyContent: 'center' }}>
               <button className="btn btn-primary" onClick={() => setShowModal(false)}>

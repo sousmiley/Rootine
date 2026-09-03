@@ -1,9 +1,3 @@
-/**
- * Client-safe config.
- *
- * The Perenual API key is now server-side only (PERENUAL_API_KEY in .env.local).
- * All plant data is fetched through /api/plant-search and /api/plant-details proxy routes.
- */
 const config = {
   // Deterministic Plant of the Day ID — changes daily, stays in the free tier (IDs 1–3000)
   PLANT_OF_DAY_ID: (() => {
