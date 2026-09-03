@@ -1,28 +1,21 @@
+/**
+ * Client-safe config.
+ *
+ * The Perenual API key is now server-side only (PERENUAL_API_KEY in .env.local).
+ * All plant data is fetched through /api/plant-search and /api/plant-details proxy routes.
+ */
 const config = {
-    API_KEY: process.env.NEXT_PUBLIC_API_KEY,
-    PLANT_OF_DAY_ID: (() => {
-        // Get current date in YYYYMMDD format
-        const today = new Date();
-        const dateString = today.getFullYear().toString() + 
-                          (today.getMonth() + 1).toString().padStart(2, '0') + 
-                          today.getDate().toString().padStart(2, '0');
-        
-        // Convert date string to a number and use it as a seed
-        let seed = parseInt(dateString);
-        
-        // Use a larger multiplier to get better distribution
-        seed = seed * 1234567;
-        
-        // Use modulo to get a number between 0 and 3000, then add 1
-        const randomNum = (seed % 2999) + 1;
-        
-        return randomNum;
-    })(),
-    
-    // Google API credentials
-    GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
-    GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
-    GOOGLE_DISCOVERY_DOC: process.env.GOOGLE_DISCOVERY_DOC,
-    GOOGLE_SCOPES: process.env.GOOGLE_SCOPES,
+  // Deterministic Plant of the Day ID — changes daily, stays in the free tier (IDs 1–3000)
+  PLANT_OF_DAY_ID: (() => {
+    const today = new Date();
+    const seed  =
+      today.getFullYear() * 10000 +
+      (today.getMonth() + 1) * 100 +
+      today.getDate();
+    // Cheap LCG shuffle to spread IDs across 1–3000
+    const shuffled = ((seed * 1664525 + 1013904223) >>> 0) % 3000;
+    return shuffled + 1;
+  })(),
 };
+
 export default config;
