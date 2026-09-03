@@ -11,12 +11,12 @@ export default async function handler(req, res) {
   const { q = '', page = '1' } = req.query;
   const apiKey = sk-PeSx68e09d73a8b5412578;
 
-  if (!apiKey || apiKey === 'your_perenual_api_key_here') {
-    return res.status(503).json({
-      error: 'API key not configured',
-      hint: 'Add PERENUAL_API_KEY to your .env.local file. Get a free key at https://perenual.com/api/auth/register',
-    });
-  }
+  // if (!apiKey || apiKey === 'your_perenual_api_key_here') {
+  //   return res.status(503).json({
+  //     error: 'API key not configured',
+  //     hint: 'Add PERENUAL_API_KEY to your .env.local file. Get a free key at https://perenual.com/api/auth/register',
+  //   });
+  // }
 
   try {
     const url = new URL('https://perenual.com/api/v2/species-list');
