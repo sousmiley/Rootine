@@ -1,134 +1,77 @@
 'use client';
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { useEffect } from 'react';
-import config from '@/config';
-import Head from 'next/head';
+import { Leaf, Search, BellRing, Heart, Shuffle, LayoutGrid, Moon, Info } from 'lucide-react';
+import Layout from '@/components/Layout';
 
-<Head>
-  <title>About Us - Rootine</title>
-  <link rel="icon" href="/favicon.ico" />
-</Head>
+const FEATURES = [
+  { icon: <Search size={18} />, title: 'Plant Search', desc: 'Search thousands of houseplants by name and browse detailed care information.' },
+  { icon: <Leaf size={18} />,   title: 'Plant of the Day', desc: 'Discover a new plant every day with full care details and photos.' },
+  { icon: <BellRing size={18} />, title: 'Watering Reminders', desc: 'Set localised watering reminders saved on your device.' },
+  { icon: <Heart size={18} />,  title: 'Favourites', desc: 'Save plants you love and revisit their care info anytime.' },
+  { icon: <Shuffle size={18} />, title: 'Surprise Me', desc: 'Feeling adventurous? Discover a completely random plant instantly.' },
+  { icon: <LayoutGrid size={18} />, title: 'Grid & List Views', desc: 'Toggle between a compact list and a visual card grid on search results.' },
+  { icon: <Moon size={18} />,   title: 'Dark Mode', desc: 'Easy on the eyes, flip to dark mode any time with the toggle in the nav.' },
+];
 
 export default function AboutPage() {
-  useEffect(() => {
-    const links = document.querySelectorAll('.plant-of-day-link');
-    links.forEach((link) => {
-      link.href = `/plant-info/${config.PLANT_OF_DAY_ID}`;
-    });
-  }, []);
-
   return (
-    <div>
-    {/* Nav Bar */}
-      <nav>
-        <div className="nav-left">
-          <button onClick={() => window.history.back()}>
-            <Image
-              src="/images/back.png"
-              alt="Back"
-              className="nav-icon"
-              width={32}
-              height={32}
-            />
-          </button>
-          <Link href="/">
-            <Image
-              src="/images/homebutton.png"
-              alt="Home"
-              className="nav-icon"
-              width={32}
-              height={32}
-            />
-          </Link>
+    <Layout title="About" showBack>
+      <div className="page-hero">
+        <h1>About Rootine</h1>
+        <p>Making plant care easier for everyone, from curious beginners to seasoned growers.</p>
+      </div>
+
+      <div className="about-grid">
+        <div className="about-card">
+          <h3><Leaf size={18} /> Welcome to Rootine 🌱</h3>
+          <p>
+            Rootine is a growing initiative focused on making gardening knowledge and tools easily
+            accessible. Its aim is to encourage people to get their hands dirty and grow with
+            confidence :{')'}
+          </p>
+          <p style={{ marginTop: '0.75rem' }}>
+            Whether you're a first-time plant parent or an experienced gardener, keeping track of
+            plant care can be tricky. Rootine helps you stay on top of it, without the fuss.
+          </p>
         </div>
 
-        <div className="nav-right">
-          <Link
-            href={`/plant-info/${config.PLANT_OF_DAY_ID}`}
-            className="plant-of-day-link"
-          >
-            <span className="nav-text">Plant of the day</span>
-            <Image
-              src="/images/plant.png"
-              alt="Plant of the day"
-              className="nav-icon-only"
-              width={32}
-              height={32}
-            />
-          </Link>
-
-          <Link href="/contact">
-            <span className="nav-text">Contact us</span>
-            <Image
-              src="/images/contact.png"
-              alt="Contact"
-              className="nav-icon-only"
-              width={32}
-              height={32}
-            />
-          </Link>
-
-          <Link href="/about">
-            <span className="nav-text">About us</span>
-            <Image
-              src="/images/about.png"
-              alt="About"
-              className="nav-icon-only"
-              width={32}
-              height={32}
-            />
-          </Link>
+        <div className="about-card">
+          <h3><Info size={18} /> Background 🌿</h3>
+          <p>
+            Rootine began as a small group project created by four students passionate about making
+            gardening more accessible. Since then, it's grown into something more, now led
+            independently, inspired by a passion for learning, community, and real-world gardening
+            practice.
+          </p>
+          <p style={{ marginTop: '0.75rem' }}>
+            Data from {' '}
+            <a href="https://perenual.com" target="_blank" rel="noreferrer" style={{ color: 'var(--accent)', fontWeight: 600 }}>
+              Perenual Plant API
+            </a>
+            , a comprehensive plant database.
+          </p>
         </div>
-      </nav>
+      </div>
 
-      <main>
-        <h1>About us</h1>
-        <div className="about-container">
-          <div className="about-text">
-            <h2>Welcome to Rootine! 🌱</h2>
-            <p>
-              Rootine is a growing initiative, with a focus on making gardening
-              knowledge and tools easily accessible. Its aim is to encourage
-              people to get their hands dirty and grow with confidence.
-            </p>
-            <p>
-              Why? Because everyone deserves a bit of nature in their living
-              space! Whether you&rsquo;re a first-time plant parent or an experienced
-              grower, keeping track of plant care can be tricky. Rootine can
-              help...
-            </p>
-
-            <h2>Background 🌿</h2>
-            <p>
-              Rootine began as a small group project created by four students
-              passionate about making gardening more accessible. Since then,
-              it&rsquo;s grown into something more — now led independently, inspired
-              by a passion for learning, community, and real-world gardening
-              practice.
-            </p>
-
-            <h2>About this web app 🪴</h2>
-            <p>Rootine uses Perenual Plant API for its database. You can:</p>
-            <ul>
-              <li>Search for houseplants</li>
-              <li>Set up watering reminders in Google Tasks</li>
-              <li>
-                Discover and learn more about new plants everyday through the
-                &quot;Plant of the Day&quot; feature
-              </li>
-            </ul>
-
-            <p>
-              I hope this app helps make plant care a little easier and more
-              enjoyable for everyone.
-            </p>
-
-            <p className="end-note">Happy growing! 🌳</p>
-          </div>
+      <div className="section">
+        <h2 style={{ marginBottom: '1rem' }}>What you can do 🪴</h2>
+        <div className="about-grid">
+          {FEATURES.map((f) => (
+            <div key={f.title} className="about-card">
+              <h3>{f.icon} {f.title}</h3>
+              <p>{f.desc}</p>
+            </div>
+          ))}
         </div>
-      </main>
-    </div>
+      </div>
+
+      <div className="about-card" style={{ marginBottom: '2rem' }}>
+        <h3>🌳 Happy growing!</h3>
+        <p>
+          I hope Rootine makes plant care a little easier and more enjoyable. If you have feedback,
+          suggestions, or just want to say hello, the Contact page is always open.
+        </p>
+      </div>
+    </Layout>
   );
 }
