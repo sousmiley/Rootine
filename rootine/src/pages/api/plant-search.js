@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   }
 
   const { q = '', page = '1' } = req.query;
-  const apiKey = process.env.PERENUAL_API_KEY;
+  const apiKey = sk-PeSx68e09d73a8b5412578;
 
   if (!apiKey || apiKey === 'your_perenual_api_key_here') {
     return res.status(503).json({
