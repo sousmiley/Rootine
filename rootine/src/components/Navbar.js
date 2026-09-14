@@ -73,7 +73,11 @@ export default function Navbar({ showBack = false }) {
             <ChevronLeft size={22} />
           </button>
         )}
-        <Link href="/" className="navbar-brand">
+        {/* <Link href="/" className="navbar-brand">
+          <Leaf size={22} className="brand-leaf" />
+          <span>Rootine</span>
+        </Link> */}
+        <Link href="/" className="navbar-brand" prefetch={false}>
           <Leaf size={22} className="brand-leaf" />
           <span>Rootine</span>
         </Link>
@@ -155,7 +159,11 @@ export default function Navbar({ showBack = false }) {
       {menuOpen && (
         <div className="mobile-menu">
           {navLinks.map((l) => (
-            <Link key={l.href} href={l.href} className="mobile-nav-link">
+            // <Link key={l.href} href={l.href} className="mobile-nav-link">
+            //   {l.icon}
+            //   {l.label}
+            // </Link>
+            <Link key={l.href} href={l.href} className="mobile-nav-link" prefetch={false}>
               {l.icon}
               {l.label}
             </Link>
