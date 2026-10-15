@@ -6,6 +6,7 @@ import {
   Search, LayoutGrid, List, Heart, ArrowRight, Clock, SlidersHorizontal,
 } from 'lucide-react';
 import Layout from '@/components/Layout';
+import config from '@/config';
 
 const CARE_FILTERS = [
   { value: '', label: 'All difficulties' },
@@ -70,9 +71,13 @@ export default function SearchResults() {
   const fetchResults = useCallback(async (q) => {
     setLoading(true);
     try {
-      const res  = await fetch(`/api/plant-search?q=${encodeURIComponent(q)}&page=1`);
+      const url = new URL('https://perenual.com/api/v2/species-list');
+      url.searchParams.set('key', config.PERENUAL_API_KEY);
+      url.searchParams.set('q', q);
+      url.searchParams.set('page', '1');
+      const res  = await fetch(url.toString());
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Search failed');
+      if (data.message?.toLowerCase().includes('upgrade')) throw new Error('API limit reached');
       setResults(data.data || []);
     } catch (err) {
       console.error(err);

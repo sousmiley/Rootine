@@ -7,6 +7,7 @@ import {
   Lightbulb, Check, X,
 } from 'lucide-react';
 import Layout from '@/components/Layout';
+import config from '@/config';
 
 /* ─── Helpers ──────────────────────────────────────────────── */
 const formatWatering = (w) => {
@@ -185,15 +186,16 @@ export default function PlantInfoPage() {
     setTimeout(() => setToasts((prev) => prev.filter((t) => t.id !== id)), 3500);
   }, []);
 
-  /* Fetch plant details via proxy route — API key stays server-side */
+  /* Fetch plant details — direct Perenual call (static export, no server) */
   useEffect(() => {
     if (!plantId) return;
     setLoading(true);
     setError(false);
-    fetch(`/api/plant-details?id=${encodeURIComponent(plantId)}`)
+    fetch(`https://perenual.com/api/v2/species/details/${encodeURIComponent(plantId)}?key=${config.PERENUAL_API_KEY}`)
       .then((r) => r.json())
       .then((data) => {
-        if (data.error) throw new Error(data.error);
+        if (data.message?.toLowerCase().includes('upgrade')) throw new Error('API tier limit');
+        if (!data.id) throw new Error('Invalid response');
         setPlant(data);
       })
       .catch(() => setError(true))

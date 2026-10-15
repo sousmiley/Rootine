@@ -67,14 +67,16 @@ export default function HomePage() {
     } catch {}
   }, []);
 
-  // Fetch Plant of the Day
+  // Fetch Plant of the Day — direct Perenual call (static export, no server)
   useEffect(() => {
     const fetchPotd = async () => {
       setPotdLoading(true);
       try {
-        const res  = await fetch(`/api/plant-details?id=${config.PLANT_OF_DAY_ID}`);
+        const res  = await fetch(
+          `https://perenual.com/api/v2/species/details/${config.PLANT_OF_DAY_ID}?key=${config.PERENUAL_API_KEY}`
+        );
         const data = await res.json();
-        if (res.ok && !data.error) {
+        if (res.ok && !data.message?.toLowerCase().includes('upgrade')) {
           setPotdPlant(data);
         }
       } catch {}
