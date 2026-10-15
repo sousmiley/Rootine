@@ -5,7 +5,7 @@
  * and accepted by the project owner.
  */
 const config = {
-  PERENUAL_API_KEY: 'sk-PeSx68e09d73a8b5412578',
+  PERENUAL_API_KEY: 'sk-krnF6ad044ee72b0312578',
 
   // Deterministic Plant of the Day ID — changes daily, stays in free tier (1–3000)
   PLANT_OF_DAY_ID: (() => {
