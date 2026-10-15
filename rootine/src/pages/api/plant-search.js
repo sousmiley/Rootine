@@ -3,7 +3,7 @@
  * Proxies to Perenual species-list endpoint.
  */
 
-const PERENUAL_API_KEY = 'sk-PeSx68e09d73a8b5412578';
+const PERENUAL_API_KEY = 'sk-5e7n6ad0228ec083b12578';
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
