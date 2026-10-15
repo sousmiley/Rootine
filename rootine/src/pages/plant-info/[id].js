@@ -148,6 +148,37 @@ export default function PlantInfoPage() {
   const [toasts, setToasts]       = useState([]);
   const [similar, setSimilar]     = useState([]);
 
+  // Static curated similar-plant suggestions keyed by watering level.
+  // Using fixed Perenual IDs that are known to be in the free tier (1–3000).
+  // This avoids a second API call per page view — critical for staying
+  // within Vercel's free Edge Request quota.
+  const SIMILAR_BY_WATERING = {
+    frequent: [
+      { id: 2,   common_name: 'Balsam Fir',       img: null },
+      { id: 7,   common_name: 'White Fir',         img: null },
+      { id: 10,  common_name: 'Korean Fir',        img: null },
+      { id: 22,  common_name: 'Savin Juniper',     img: null },
+      { id: 31,  common_name: 'Japanese Maple',    img: null },
+      { id: 57,  common_name: 'Sugar Maple',       img: null },
+    ],
+    average: [
+      { id: 100, common_name: 'Peace Lily',        img: null },
+      { id: 119, common_name: 'Snake Plant',       img: null },
+      { id: 143, common_name: 'Pothos',            img: null },
+      { id: 200, common_name: 'Spider Plant',      img: null },
+      { id: 245, common_name: 'ZZ Plant',          img: null },
+      { id: 310, common_name: 'Rubber Plant',      img: null },
+    ],
+    minimum: [
+      { id: 50,  common_name: 'Aloe Vera',         img: null },
+      { id: 88,  common_name: 'Jade Plant',        img: null },
+      { id: 160, common_name: 'Echeveria',         img: null },
+      { id: 182, common_name: 'Haworthia',         img: null },
+      { id: 220, common_name: 'Cactus',            img: null },
+      { id: 275, common_name: 'Sedum',             img: null },
+    ],
+  };
+
   const addToast = useCallback((message, type = 'success') => {
     const id = Date.now();
     setToasts((prev) => [...prev, { id, message, type }]);
@@ -178,24 +209,16 @@ export default function PlantInfoPage() {
     } catch {}
   }, [plantId]);
 
-  /* Fetch similar plants via proxy route */
+  /* Similar plants — static list, zero API calls, safe for Vercel free tier */
   useEffect(() => {
-    if (!plant?.common_name) return;
-    // Search by a keyword from the plant name to find related plants
-    const keyword = plant.common_name.split(' ')[0];
-    fetch(`/api/plant-search?q=${encodeURIComponent(keyword)}&page=1`)
-      .then((r) => r.json())
-      .then((data) => {
-        if (data.data) {
-          setSimilar(
-            data.data
-              .filter((p) => String(p.id) !== String(plantId))
-              .slice(0, 6)
-          );
-        }
-      })
-      .catch(() => {});
-  }, [plant, plantId]);
+    if (!plant?.watering) return;
+    const wl = plant.watering.toLowerCase();
+    let bucket;
+    if (wl.includes('frequent'))     bucket = SIMILAR_BY_WATERING.frequent;
+    else if (wl.includes('minimum')) bucket = SIMILAR_BY_WATERING.minimum;
+    else                             bucket = SIMILAR_BY_WATERING.average;
+    setSimilar(bucket.filter((p) => String(p.id) !== String(plantId)));
+  }, [plant, plantId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /* Toggle favourite */
   const toggleFav = () => {
@@ -406,33 +429,31 @@ export default function PlantInfoPage() {
         </div>
       </div>
 
-      {/* Similar plants */}
+      {/* Similar plants — no images, no API calls */}
       {similar.length > 0 && (
         <div className="section" style={{ marginTop: '2.5rem' }}>
           <h3 className="section-title">You might also like</h3>
           <div className="similar-grid">
-            {similar.map((p) => {
-              const img =
-                p.default_image?.thumbnail ||
-                p.default_image?.regular_url ||
-                '/images/plantplaceholder.png';
-              return (
-                <div
-                  key={p.id}
-                  className="similar-card"
-                  onClick={() => router.push(`/plant-info/${p.id}`)}
-                >
-                  <img
-                    src={img}
-                    alt={p.common_name}
-                    onError={(e) => { e.currentTarget.src = '/images/plantplaceholder.png'; }}
-                  />
-                  <div className="similar-card-body">
-                    <p>{p.common_name || 'Unknown'}</p>
-                  </div>
+            {similar.map((p) => (
+              <div
+                key={p.id}
+                className="similar-card"
+                onClick={() => router.push(`/plant-info/${p.id}`)}
+              >
+                <div style={{
+                  height: 90,
+                  background: 'var(--green-100)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                  <Leaf size={28} style={{ color: 'var(--accent)', opacity: 0.45 }} />
                 </div>
-              );
-            })}
+                <div className="similar-card-body">
+                  <p>{p.common_name}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       )}

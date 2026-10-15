@@ -49,10 +49,14 @@ export default function HomePage() {
   const [showHistory, setShowHistory] = useState(false);
   const searchRef = useRef(null);
 
-  // Pick a joke + fact on mount (changes on reload)
+  // On each reload, randomly show EITHER a joke OR a fact — never both
   useEffect(() => {
-    setJoke(PLANT_JOKES[Math.floor(Math.random() * PLANT_JOKES.length)]);
-    setFact(DID_YOU_KNOW[Math.floor(Math.random() * DID_YOU_KNOW.length)]);
+    const showJoke = Math.random() < 0.5;
+    if (showJoke) {
+      setJoke(PLANT_JOKES[Math.floor(Math.random() * PLANT_JOKES.length)]);
+    } else {
+      setFact(DID_YOU_KNOW[Math.floor(Math.random() * DID_YOU_KNOW.length)]);
+    }
   }, []);
 
   // Load search history
@@ -130,14 +134,6 @@ export default function HomePage() {
         <h1 className="hero-title">Rootine 🌱</h1>
         <p className="hero-subtitle">Your personal plant care companion</p>
 
-        {/* Plant joke */}
-        {joke && (
-          <div className="joke-card">
-            <span className="joke-emoji">😄</span>
-            {joke}
-          </div>
-        )}
-
         {/* Search bar */}
         <div ref={searchRef} style={{ position: 'relative', maxWidth: 600, margin: '0 auto 1.5rem' }}>
           <form onSubmit={handleSearch} className="search-bar-wrap">
@@ -168,30 +164,36 @@ export default function HomePage() {
           )}
         </div>
 
-        {/* Did You Know ticker */}
-        {fact && (
+        {/* Ticker — shows either a plant pun OR a did-you-know, never both */}
+        {(joke || fact) && (
           <div className="ticker-wrap">
-            <span className="ticker-label">💡 Did you know?</span>
-            <span className="ticker-text">{fact}</span>
+            {joke
+              ? <><span className="ticker-label">🌻 Plant puns:</span><span className="ticker-text">{joke}</span></>
+              : <><span className="ticker-label">💡 Did you know?</span><span className="ticker-text">{fact}</span></>
+            }
           </div>
         )}
       </div>
 
-      {/* Plant of the Day card */}
+      {/* Plant of the Day card — compact */}
       <div className="section">
         {potdLoading ? (
-          <div className="skeleton" style={{ height: 320, maxWidth: 520, margin: '0 auto', borderRadius: 22 }} />
+          <div className="skeleton" style={{ height: 200, maxWidth: 400, margin: '0 auto', borderRadius: 22 }} />
         ) : (
-          <div className="potd-card" onClick={() => router.push(`/plant-info/${config.PLANT_OF_DAY_ID}`)}>
-            <div className="potd-img-wrap">
+          <div
+            className="potd-card"
+            style={{ maxWidth: 400, flexDirection: 'row', alignItems: 'center' }}
+            onClick={() => router.push(`/plant-info/${config.PLANT_OF_DAY_ID}`)}
+          >
+            <div className="potd-img-wrap" style={{ height: 130, width: 130, flexShrink: 0 }}>
               <img src={potdImg} alt={potdPlant?.common_name || 'Plant of the Day'}
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 onError={(e) => { e.currentTarget.src = '/images/plantplaceholder.png'; }}
               />
-              <div className="potd-badge"><Leaf size={13} /> Plant of the Day</div>
+              <div className="potd-badge"><Leaf size={11} /> Today</div>
             </div>
-            <div className="potd-body">
-              <h2>{potdPlant?.common_name || 'Discover today\'s plant'}</h2>
+            <div className="potd-body" style={{ padding: '0.85rem 1rem' }}>
+              <h2 style={{ fontSize: '1.05rem' }}>{potdPlant?.common_name || "Today's plant"}</h2>
               {potdPlant?.scientific_name?.[0] && (
                 <p className="potd-sci">{potdPlant.scientific_name[0]}</p>
               )}
@@ -205,31 +207,31 @@ export default function HomePage() {
                   <span className="badge badge-blue">💧 {watering}</span>
                 )}
               </div>
-              <div className="potd-cta">View details <ArrowRight size={15} /></div>
+              <div className="potd-cta" style={{ fontSize: '0.8rem' }}>View details <ArrowRight size={13} /></div>
             </div>
           </div>
         )}
       </div>
 
-      {/* Quick action tiles */}
-      <div className="home-actions">
-        <button className="action-tile" onClick={handleSurprise}>
-          <Shuffle size={28} />
+      {/* Quick action tiles — single compact row */}
+      <div className="home-actions" style={{ gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.6rem' }}>
+        <button className="action-tile" style={{ padding: '0.75rem 0.5rem', gap: '0.3rem' }} onClick={handleSurprise}>
+          <Shuffle size={20} />
           <span>Surprise Me</span>
-          <small>Discover a random plant</small>
+          <small>Random plant</small>
         </button>
-        <button className="action-tile" onClick={() => router.push('/favourites')}>
-          <Heart size={28} />
-          <span>My Favourites</span>
-          <small>Plants you've saved</small>
+        <button className="action-tile" style={{ padding: '0.75rem 0.5rem', gap: '0.3rem' }} onClick={() => router.push('/favourites')}>
+          <Heart size={20} />
+          <span>Favourites</span>
+          <small>Saved plants</small>
         </button>
-        <button className="action-tile" onClick={() => router.push('/reminders')}>
-          <BellRing size={28} />
+        <button className="action-tile" style={{ padding: '0.75rem 0.5rem', gap: '0.3rem' }} onClick={() => router.push('/reminders')}>
+          <BellRing size={20} />
           <span>Reminders</span>
-          <small>Watering schedule</small>
+          <small>Watering</small>
         </button>
-        <button className="action-tile" onClick={() => router.push('/about')}>
-          <BookOpen size={28} />
+        <button className="action-tile" style={{ padding: '0.75rem 0.5rem', gap: '0.3rem' }} onClick={() => router.push('/about')}>
+          <BookOpen size={20} />
           <span>Learn More</span>
           <small>About Rootine</small>
         </button>
